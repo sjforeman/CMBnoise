@@ -414,3 +414,21 @@ class LiteBIRD(Experiment):
             )
             / np.sqrt(2),
         )
+
+        
+class CMB_HD(Experiment):
+    """Noise curves for CMB-HD.
+
+    Numbers taken from Table 1 of
+        https://arxiv.org/abs/2002.12714
+        
+    These do not include atmospheric noise.
+    """
+
+    def __init__(self):
+        Experiment.__init__(
+            self,
+            freqs=[30, 40, 90, 150, 220, 280, 350],
+            beam_FWHMs=[1.25, 0.94, 0.42, 0.25, 0.17, 0.13, 0.11],
+            map_noise_levels=[6.5, 3.4, 0.7, 0.8, 2.0, 2.7, 100.0]
+        )
