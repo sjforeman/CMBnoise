@@ -115,6 +115,52 @@ def Jyperrad_to_uKarcmin(nu, n):
     return Jypersr_to_uKCMB(nu, n) / arcmin
 
 
+def uKarcmin_to_Jypersr(nu, n, fwhm):
+    """Convert map noise value in uK_CMB arcmin to Jy sr^-1
+
+    One must specify a beam FWHM for this.
+
+    Parameters
+    ----------
+    nu : float
+        Frequency, in GHz.
+    n : float
+        Noise, in uK_CMB arcmin.
+    fwhm : float
+        Beam FWHM (or other measure of linear size), in arcmin.
+
+    Returns
+    -------
+    I : float
+        Equivalent value in Jy sr^{-1}.
+    """
+    return uKCMB_to_Jypersr(nu, n) * arcmin / (fwhm * arcmin)
+
+
+def Jypersr_to_uKarcmin(nu, n, fwhm):
+    """Convert from Jy sr^-1 to uK_CMB arcmin.
+
+    Simply inverts the conversion done by uKarcmin_to_Jypersr.
+    
+    One must specify a beam FWHM for this.
+
+    Parameters
+    ----------
+    nu : float
+        Frequency, in GHz.
+    n : float
+        Noise in Jy sr^-1.
+    fwhm : float
+        Beam FWHM (or other measure of linear size), in arcmin.
+
+    Returns
+    -------
+    N : float
+        Value in uK_CMB arcmin.
+    """
+    return Jypersr_to_uKCMB(nu, n) / arcmin * (fwhm * arcmin)
+
+
 def test_TtoI():
     """Verify uK-arcmin to Jy rad^{-1} conversion against some results from the
     literature.
@@ -125,12 +171,12 @@ def test_TtoI():
     print("Schaan+ 2018, Table I:\t\t1.2 Jy rad^-1")
     print(
         "\n23.9 uK-arcmin at 21GHz with a 38.4arcmin FWHM beam = \t%g Jy sr^-1"
-        % (uKarcmin_to_Jyperrad(21, 23.9) / (38.4 * arcmin))
+        % (uKarcmin_to_Jypersr(21, 23.9, 38.4))
     )
     print("Hanany+ 2019, Table 1.2:\t\t\t\t8.3 Jy sr^-1")
     print(
         "\n4 uK-arcmin at 186GHz with a 4.3arcmin FWHM beam = \t%g Jy sr^-1"
-        % (uKarcmin_to_Jyperrad(186, 4) / (4.3 * arcmin))
+        % (uKarcmin_to_Jypersr(186, 4, 4.3))
     )
     print("Hanany+ 2019, Table 1.2:\t\t\t\t433 Jy sr^-1")
 
