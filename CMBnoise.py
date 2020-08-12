@@ -141,7 +141,7 @@ def Jypersr_to_uKarcmin(nu, n, fwhm):
     """Convert from Jy sr^-1 to uK_CMB arcmin.
 
     Simply inverts the conversion done by uKarcmin_to_Jypersr.
-    
+
     One must specify a beam FWHM for this.
 
     Parameters
@@ -361,29 +361,32 @@ class PICO_baseline(_PICO_base):
     def __init__(self):
         _PICO_base.__init__(
             self,
-            map_noise_levels=[
-                23.9,
-                18.4,
-                12.4,
-                7.9,
-                7.9,
-                5.7,
-                5.4,
-                4.2,
-                2.8,
-                2.3,
-                2.1,
-                1.8,
-                4.0,
-                4.5,
-                3.1,
-                4.2,
-                4.5,
-                9.1,
-                45.8,
-                177,
-                1050,
-            ],
+            map_noise_levels=np.array(
+                [
+                    23.9,
+                    18.4,
+                    12.4,
+                    7.9,
+                    7.9,
+                    5.7,
+                    5.4,
+                    4.2,
+                    2.8,
+                    2.3,
+                    2.1,
+                    1.8,
+                    4.0,
+                    4.5,
+                    3.1,
+                    4.2,
+                    4.5,
+                    9.1,
+                    45.8,
+                    177,
+                    1050,
+                ]
+            )
+            / np.sqrt(2),
         )
 
 
@@ -397,29 +400,32 @@ class PICO_CBE(_PICO_base):
     def __init__(self):
         _PICO_base.__init__(
             self,
-            map_noise_levels=[
-                16.9,
-                13.0,
-                8.7,
-                5.6,
-                5.6,
-                4.0,
-                3.8,
-                3.0,
-                2.0,
-                1.6,
-                1.5,
-                1.3,
-                2.8,
-                3.2,
-                2.2,
-                3.0,
-                3.2,
-                6.4,
-                32.4,
-                125,
-                740,
-            ],
+            map_noise_levels=np.array(
+                [
+                    16.9,
+                    13.0,
+                    8.7,
+                    5.6,
+                    5.6,
+                    4.0,
+                    3.8,
+                    3.0,
+                    2.0,
+                    1.6,
+                    1.5,
+                    1.3,
+                    2.8,
+                    3.2,
+                    2.2,
+                    3.0,
+                    3.2,
+                    6.4,
+                    32.4,
+                    125,
+                    740,
+                ]
+            )
+            / np.sqrt(2),
         )
 
 
@@ -461,13 +467,13 @@ class LiteBIRD(Experiment):
             / np.sqrt(2),
         )
 
-        
+
 class CMB_HD(Experiment):
     """Noise curves for CMB-HD.
 
     Numbers taken from Table 1 of
         https://arxiv.org/abs/2002.12714
-        
+
     These do not include atmospheric noise.
     """
 
@@ -476,5 +482,5 @@ class CMB_HD(Experiment):
             self,
             freqs=[30, 40, 90, 150, 220, 280, 350],
             beam_FWHMs=[1.25, 0.94, 0.42, 0.25, 0.17, 0.13, 0.11],
-            map_noise_levels=[6.5, 3.4, 0.7, 0.8, 2.0, 2.7, 100.0]
+            map_noise_levels=[6.5, 3.4, 0.7, 0.8, 2.0, 2.7, 100.0],
         )
