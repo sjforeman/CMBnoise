@@ -273,11 +273,13 @@ class Planck(Experiment):
         map_noise_lower = np.array([2.5, 2.7, 3.5, 1.29, 0.55, 0.78, 2.56]) * 60.0
 
         # The table gives the noise levels for 545 and 857 GHz in kJy sr^-1 deg,
-        # which we convert to Jy rad^-1 and then to uK arcmin.
+        # which we convert to Jy rad^-1 using the conversion
+        #   1 sr^-1 deg = pi/180 rad^-1 ,
+        # and then to uK arcmin.
         map_noise_upper = np.array(
             [
-                Jyperrad_to_uKarcmin(545, 0.78 * 1e3 * 60),
-                Jyperrad_to_uKarcmin(857, 0.72 * 1e3 * 60),
+                Jyperrad_to_uKarcmin(545, 0.78 * 1e3 * np.pi / 180),
+                Jyperrad_to_uKarcmin(857, 0.72 * 1e3 * np.pi / 180),
             ]
         )
 
